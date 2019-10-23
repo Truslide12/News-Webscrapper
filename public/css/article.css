@@ -28,3 +28,28 @@ textarea {
   height: 200px;
   font-size: 18px;
 }
+
+.background-image {
+  background-image: url("../img/newspaper.jpg")
+}
+
+@media (min-width: 1px) {
+  .display-1 {
+      font-size: 4rem
+  }
+}
+
+@media (min-width: 576px) {
+  .display-1{
+      font-size: 5rem
+  }
+  
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {
+  .display-1 {
+      font-size: 6rem
+  }
+  
+}
