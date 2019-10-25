@@ -1,9 +1,7 @@
 const express = require("express");
 const exhbs = require("express-handlebars");
-const bodyParser = require("body-parser"); //JSON responses
 const logger = require("morgan");
 const mongoose = require("mongoose");
-//const request = require(request);
 
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
@@ -12,16 +10,13 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 // Require all models
-var db = require("./models");
+var db = require("./models/");
 
 // Port configuration for local/Heroku
 var PORT =  process.env.PORT || process.argv[2] || 3030;
 
 // Initialize Express
 const app = express();
-
-// Use body-parser for handling form submissions
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -32,18 +27,18 @@ app.use(express.json());
 app.use(express.static("public"));
 const hbs = exhbs.create();
 
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', exhbs({ defaultLayout: "main" }));
 app.set('view engine', 'handlebars');
 
 // Connect to the Mongo DB
 //mongoose.connect("mongodb://localhost/newsdb", { useNewUrlParser: true });
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsdb";
-mongoose.promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true }).then(function(){
+    console.log("Mongoose is successfully connected");
+});
 
-// Controllers
-const router = require("./controllers/api.js");
-app.use(router);
+// Routes
+require("./controllers/api.js")(app);
 
 
 // Start the server

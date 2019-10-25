@@ -1,0 +1,58 @@
+<div data-id="{{_id}}" class="card mb-2">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-10">
+                <img src={{img}} class="float-left">
+                <a href={{link}} target="_blank" class="text-white">
+                    <h2>{{title}}</h2>
+                </a>
+            </div>
+            <div class="col-2">
+                <a class="btn btn-danger deleteSaved float-right text-white" data-id="{{_id}}">DELETE FROM SAVED</a>
+            </div>
+            <div class="col-2 pl-0">
+                <button type="button" class="btn btn-info addNotes float-right text-white" data-toggle="modal"
+                    data-target="#exampleModal" data-id="{{_id}}">ADD NOTES</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">ADD NOTES</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5 class="text-primary">Comments:</h5>
+                                {{#if note.length}}
+                                <div class="list-group note-container">
+                                    {{#each note}}
+                                    <div class="border list-group-item note">
+                                        {{!-- Cant print comment! --}}
+                                        {{!-- {{_id}} --}}
+                                        <span>{{comment}}</span>
+                                        {{!-- Not deleting --}}
+                                        <button class="btn btn-danger float-right note-delete" data-id="{{_id}}"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                                {{else}}
+                                <h4 class="mt-2 text-warning">No saved notes.</h4>
+                                {{/if}}
+                                <hr>
+                                <textarea class="border" id="noteInput" placeholder="New Note" rows="4"
+                                    cols="56"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary saveNotes" data-id="{{_id}}">SAVE
+                                    NOTES</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

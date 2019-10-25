@@ -1,46 +1,28 @@
-<nav class="navbar">
-            <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home
-                <span class="sr-only">(current)</span>
-            </a>
-            <a class="nav-item nav-link" href="/saved">Saved Articles</a>
-            <a href="/scrape" class="btn btn-danger active" role="button" aria-pressed="true">Scrape OANN</a>
+<div class="row">
+    <div class="col-12">
+        {{#if articles.length}}
+        {{#each articles}}
+        {{#unless saved}}
+        {{> article}}
+        {{/unless}}
+        {{/each}}
+        {{else}}
+        <div class="alert alert-warning text-center">
+            <h4>Uh Oh. Looks like we don't have any new articles.</h4>
         </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="jumbotron text-center background-image">
-                    <div class="overlay">
-                <div class="caption">
-                    <h1 class="display-1 text-white">Mongo Scraper</h1>
-                    <h2 class="text-white">OANN Edition</h2>
-                </div>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>What Would You Like To Do?</h3>
+            </div>
+            <div class="card-body">
+                <a class="scrape">
+                    <h4>Try Scraping New Posts!</h4>
+                </a>
+                <a href="/saved">
+                    <h4>Go to Saved Posts</h4>
+                </a>
             </div>
         </div>
-    </div>
-    <div class="row"></div>
-    <div class="col-12">
-            {{#if articles}}
-            {{#each articles}}
-                <div class="card w-90">
-                    <div class="card-header text-white bg-primary">
-                        <a href={{link}} target="_blank" class="text-white">
-                            <h2>{{title}}</h2>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{img}}">
-                        <button id="{{_id}}" class="btn btn-primary save-btn">Save Article</button>
-                    </div>
-                </div>
-            {{/each}}
-            {{else}}
-                <div class="card text-white bg-warning w-90 p-1">
-                    <div class="card-body text-center">
-                        Uh oh. Looks like we don't have any new articles
-                    </div>
-                </div>
-            {{/if}}
-        </div>
+        {{/if}}
     </div>
 </div>

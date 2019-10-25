@@ -1,65 +1,23 @@
-<nav class="navbar">
-            <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Home
-                <span class="sr-only">(current)</span>
-            </a>
-            <a class="nav-item nav-link active" href="/saved">Saved Articles</a>
-            <a href="/scrape" class="btn btn-danger" role="button" aria-pressed="true">Scrape NYT</a>
+<div class="row">
+    <div class="col">
+        {{#if savedArticles.length}}
+        {{#each savedArticles}}
+        {{#if saved}}
+        {{> savedPosts}}
+        {{/if}}
+        {{/each}}
+        {{else}}
+        <div class="alert alert-warning text-center">
+            <h4>You don't have any saved posts.</h4>
         </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="jumbotron text-center background-image">
-                    <div class="overlay">
-                <div class="caption">
-                    <h1 class="display-1 text-white">Mongo Scraper</h1>
-                    <h2 class="text-white">OANN Edition</h2>
-                </div>
+        <div class="card text-center">
+            <div class="card-header">
+                <h3>Would You Like Browse Available Posts?</h3>
+            </div>
+            <div class="card-body">
+                <a href="/"><h4>Browse Posts</h4></a>
             </div>
         </div>
-    </div>
-    <div class="row"></div>
-        <div class="col-12">
-            {{#each articles}}
-                <div class="card w-90">
-                    <div class="card-header text-white bg-primary">
-                        <a href={{link}} target="_blank" class="text-white">
-                            <h2>{{title}}</h2>
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{img}}">
-                        <button data="{{_id}}" class="btn btn-info note-btn">Article Notes</button>
-                        <button data="{{_id}}" class="btn btn-danger delete-btn">Delete From Saved</button>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="successMessage" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Notes for Article <span id="article-id"></span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card">
-                    <ul class="list-group list-group-flush articles-available">
-                    </ul>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label for="note-input" class="sr-only">Enter Note Here</label>
-                    <textarea class="form-control" id="note-input" rows="3" placeholder="New Note"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="save-note">Save Note</button>
-            </div>
-        </div>
+        {{/if}}
     </div>
 </div>
